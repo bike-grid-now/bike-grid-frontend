@@ -3,15 +3,10 @@
 
     import { onMount } from 'svelte';
     import { navigate } from "svelte-routing";
-    import axios from 'axios';
-    import { API_URL } from './stores.js';
+
     import Nav from './Nav.svelte';
     import Time from "svelte-time";
-import Slides from './Slides.svelte';
-
-    let url;
-
-    API_URL.subscribe((val) => url = val);
+    import Slides from './Slides.svelte';
 
     let event, media;
 
@@ -19,24 +14,7 @@ import Slides from './Slides.svelte';
 
 
     onMount(() => {
-        axios.get(url + '/api/events/' + id + '?populate=*')
-            .then(response => {
-                event = response.data.data.attributes;
-                console.log(event)
-
-                // event.Media.data.forEach(m => {
-                //     urls.push(url + m.attributes.url)
-                // });
-
-                media = event.Media;
-
-            })
-            .catch(error => {
-                console.log('fetch error', error)
-
-                // navigate to home
-                navigate('/');
-            });
+       
     })
 </script>
 

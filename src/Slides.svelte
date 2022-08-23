@@ -3,13 +3,13 @@
 
     export let media;
 
-    let imageTypes = [".JPEG", ".JPG", ".PNG", ".GIF", ".SVG", ".TIFF", ".ICO", ".DVU"]
-    let videoTypes = [".MPEG", ".MP4", ".QUICKTIME", ".WMV", ".AVI", ".FLV"]
+    const BUCKET_URL = "https://firebasestorage.googleapis.com/v0/b/bike-grid-now.appspot.com/o/"
+    const PARAMS = "?alt=media&token=d30f649a-88ce-4c47-9487-904d74c40bd3"
+    // const PARAMS = ""
 
-    import { API_URL } from './stores.js';
-
-    let url;
-    API_URL.subscribe((val) => url = val);
+    let imageTypes = ["JPEG", "JPG", "PNG", "GIF", "SVG", "TIFF", "ICO", "DVU"]
+    let videoTypes = ["MPEG", "MP4", "QUICKTIME", "WMV", "AVI", "FLV"]
+    let thisExtension;
 
     let currentMediaIndex = 0;
 
@@ -38,26 +38,26 @@
 
 <div class="card">
     <div class="background">
-        {#if imageTypes.includes(media[currentMediaIndex]?.attributes?.ext?.toUpperCase())}
-            <img src={url + media[currentMediaIndex].attributes.url} alt="">
+        {#if imageTypes.includes(media[currentMediaIndex].split('.').pop().toUpperCase())}
+            <img src={BUCKET_URL + media[currentMediaIndex].replace('/', '%2F')  + PARAMS} alt="">
         {/if}
         
-        {#if videoTypes.includes(media[currentMediaIndex]?.attributes?.ext?.toUpperCase())}
+        {#if videoTypes.includes(media[currentMediaIndex].split('.').pop().toUpperCase())}
             <video muted>
-                <source src={url + media[currentMediaIndex]?.attributes?.url} type="video/mp4">
+                <source src={BUCKET_URL + media[currentMediaIndex].replace('/', '%2F') + PARAMS} type="video/mp4">
                 <track kind="captions">
             </video>
         {/if}
     </div>
 
     <div class="foreground">
-        {#if imageTypes.includes(media[currentMediaIndex]?.attributes?.ext?.toUpperCase())}
-            <img src={url + media[currentMediaIndex].attributes.url} alt="">
+        {#if imageTypes.includes(media[currentMediaIndex].split('.').pop().toUpperCase())}
+            <img src={BUCKET_URL + media[currentMediaIndex].replace('/', '%2F') + PARAMS} alt="">
         {/if}
         
-        {#if videoTypes.includes(media[currentMediaIndex]?.attributes?.ext?.toUpperCase())}
+        {#if videoTypes.includes(media[currentMediaIndex].split('.').pop().toUpperCase())}
             <video controls>
-                <source src={url + media[currentMediaIndex]?.attributes?.url} type="video/mp4">
+                <source src={BUCKET_URL + media[currentMediaIndex].replace('/', '%2F')  + PARAMS} type="video/mp4">
                 <track kind="captions">
             </video>
         {/if}

@@ -2,36 +2,37 @@
     export let previous = false;
 
     import Time from "svelte-time";
-    import axios from 'axios';
-    import { API_URL } from './stores.js';
-    import { onMount } from "svelte";
+    import { EVENTS } from './stores.js';
     import { navigate } from "svelte-routing";
 
-    let url;
-    API_URL.subscribe((val) => url = val);
+    let events;
+    EVENTS.subscribe(val => { if (val) {
+        if (previous) {
 
-    let events = [];
+            // filter down to only events that have already happened
+            // events = val
 
-    onMount(() => {
-        axios.get(url + '/api/events?populate=*').then(response => {
-            // filter to upcoming events
-            
-            events = response.data.data.filter(e => {
-                if (previous) {
-                    return new Date(e.attributes.Date) < new Date();
-                } else {
-                    return new Date(e.attributes.Date) >= new Date();
-                }
-            }).sort((a, b) => {
-                return new Date(a.attributes.Date) - new Date(b.attributes.Date);
-            })
-        }).catch(error => {
-            console.log('fetch error', error)
-        });
-    });
+            events = val.filter(event => event.date.seconds < Date.now() / 1000);
+
+        }
+        else {
+
+            // filter down to events that have not yet happened
+            // events = val
+
+            events = val.filter(event => event.date.seconds >= Date.now() / 1000);
+
+        }
+    } });
 
     function gotoEvent(id) {
         navigate('/events/' + id);
+    }
+
+    function toDateTime(seconds) {
+        let t = new Date(1970, 0, 1);
+        t.setSeconds(seconds - 18000);
+        return t.toISOString();
     }
 </script>
 
@@ -46,14 +47,14 @@
     <div class="divider"/>
 
     <div class="grid">
-        {#if events}
+        {#if events && events.length > 0}
             {#each events as event, i}
                 <div class="row" on:click={() => gotoEvent(event.id)}>
                     <div class="p-outer left">
-                        <p>{event.attributes.EventName}</p>
+                        <p>{event.eventName}</p>
                     </div>
                     <div class="p-outer">
-                        <p><Time timestamp={event.attributes.Date} format={"dddd, MMMM D" + (previous ? "" : " h:mm A")}/></p>
+                        <p><Time timestamp={toDateTime(event.date.seconds)} format={"dddd, MMMM D" + (previous ? "" : " h:mm A")}/></p>
                     </div>
                     <div class="p-outer right">
                         <p><span class="material-symbols-outlined arrow">chevron_right</span></p>

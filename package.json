@@ -20,6 +20,7 @@
   "dependencies": {
     "@rollup/plugin-replace": "^4.0.0",
     "axios": "^0.27.2",
+    "firebase": "^9.9.2",
     "sirv-cli": "^2.0.0",
     "svelte-carousel": "^1.0.19",
     "svelte-routing": "^1.6.0",

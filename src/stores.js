@@ -1,3 +1,5 @@
 import { writable } from 'svelte/store';
 
-export const API_URL = writable(isProduction ? 'test' : 'http://localhost:1337');
+export const EVENTS = writable(null);
+export const ORGANIZERS = writable(null);
+export const WARDS = writable(null);

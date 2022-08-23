@@ -2,23 +2,10 @@
     import Nav from "./Nav.svelte";
     import { onMount } from 'svelte';
     import axios from 'axios';
-    import { API_URL } from './stores.js';
-
-    let url;
-
-    API_URL.subscribe((val) => url = val);
+    import { ORGANIZERS } from "./stores";
 
     let organizers = [];
-
-    onMount(() => {
-        axios.get(url + '/api/organizers?populate=*')
-            .then(response => {
-                organizers = response.data.data;
-            })
-            .catch(error => {
-                console.log('fetch error', error)
-            });
-    })
+    ORGANIZERS.subscribe((val) => organizers = val);
 </script>
 
 <Nav/>

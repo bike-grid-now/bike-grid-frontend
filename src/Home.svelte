@@ -3,36 +3,25 @@
     import Card from "./Card.svelte";
     import Nav from "./Nav.svelte";
     import Slides from "./Slides.svelte";
-
-    import axios from 'axios';
-    import { API_URL } from './stores.js';
     import { onMount } from "svelte";
+    import { EVENTS } from "./stores";
 
-    let url;
-    API_URL.subscribe((val) => url = val);
+    let events;
+    let nextEvent;
 
-    let events = [];
+    EVENTS.subscribe(val => {
+        if (val) {
+            // all events
+            events = val;
+
+            // get next upcoming event
+            nextEvent = val.filter(event => event.date.seconds >= Date.now() / 1000)[0];
+        }
+    });
 
     let homePage;
 
-    onMount(() => {
-        axios.get(url + '/api/events?populate=*')
-            .then(response => {
-                events = response.data.data;
-                console.log(events)
-            })
-            .catch(error => {
-                console.log('fetch error', error)
-            });
 
-        axios.get(url + '/api/home-page-media?populate=*').then(res => {
-            homePage = res.data.data.attributes.Media.data;
-
-            console.log('Home page media', homePage)
-        }).catch(err => {
-            console.log('fetch error', error)
-        })
-    });
 </script>
 
 <!-- <a class="twitter-timeline" href="https://twitter.com/bikegridnow?ref_src=twsrc%5Etfw">Tweets by bikegridnow</a>  -->
@@ -87,8 +76,8 @@
     </div>
 
     <div class="sideby">
-        {#if events[0]}
-            <Slides media={[events[0]?.attributes?.Poster?.data]} />
+        {#if events && events[0]}
+            <Slides media={[events[0].poster]} />
         {/if}
 
         <Agenda />
