@@ -1,11 +1,9 @@
 <script>
   import Agenda from "../Agenda.svelte";
   import Card from "../Card.svelte";
-  import Nav from "../Nav.svelte";
   import Slides from "../Slides.svelte";
 
   import videoUrl from "../static/video.mp4";
-  import "../styles/global.css";
 
   /** @type {import('./$types').PageData} */
   export let data;
@@ -25,8 +23,6 @@
 </script>
 
 <!-- <a class="twitter-timeline" href="https://twitter.com/bikegridnow?ref_src=twsrc%5Etfw">Tweets by bikegridnow</a>  -->
-
-<Nav absolute />
 
 <div class="hero">
   <video src={videoUrl} autoplay muted loop />

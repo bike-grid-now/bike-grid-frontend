@@ -1,10 +1,3 @@
-<script>
-  import Nav from "../../Nav.svelte";
-  import "../../styles/global.css";
-</script>
-
-<Nav />
-
 <div id="revue-embed">
   <form
     action="http://newsletter.bikegridnow.org/add_subscriber"

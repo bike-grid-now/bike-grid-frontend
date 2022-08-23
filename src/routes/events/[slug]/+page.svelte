@@ -1,8 +1,6 @@
 <script>
-  import Nav from "../../../Nav.svelte";
   import Time from "svelte-time";
   import Slides from "../../../Slides.svelte";
-  import "../../../styles/global.css";
 
   /** @type {import('./$types').PageData} */
   export let data;
@@ -14,8 +12,6 @@
     return t.toISOString();
   }
 </script>
-
-<Nav />
 
 <div class="container">
   {#if event}

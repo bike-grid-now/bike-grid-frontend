@@ -1,15 +1,9 @@
 <script>
-  import Nav from "../../Nav.svelte";
-
-  import "../../styles/global.css";
-
   /** @type {import('./$types').PageData} */
   export let data;
 
   let { organizers } = data;
 </script>
-
-<Nav />
 
 {#if organizers && organizers.length > 0}
   <div class="content">
