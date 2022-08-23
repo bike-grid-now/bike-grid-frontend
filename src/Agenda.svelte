@@ -1,5 +1,5 @@
 <script>
-  import Time from "svelte-time";
+  import { format } from "date-fns";
 
   export let events = [];
   export let previous = false;
@@ -10,10 +10,8 @@
     previous ? a.date > b.date : a.date < b.date
   );
 
-  function toDateTime(seconds) {
-    let t = new Date(1970, 0, 1);
-    t.setSeconds(seconds - 18000);
-    return t.toISOString();
+  function formatDate(date) {
+    return format(date, "EEEE, LLLL d h:mm a");
   }
 </script>
 
@@ -32,10 +30,7 @@
           <div>
             <p class="title">{event.eventName}</p>
             <p class="time">
-              <Time
-                timestamp={toDateTime(event.date.seconds)}
-                format={"dddd, MMMM D" + (!previous ? "H:mm A" : "")}
-              />
+              {formatDate(event.date.toDate())}
             </p>
           </div>
           <div>
