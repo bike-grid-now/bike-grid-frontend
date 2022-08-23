@@ -16,6 +16,8 @@
 
             // get next upcoming event
             nextEvent = val.filter(event => event.date.seconds >= Date.now() / 1000)[0];
+
+            console.log('nextEvent', nextEvent);
         }
     });
 
@@ -76,8 +78,8 @@
     </div>
 
     <div class="sideby">
-        {#if events && events[0]}
-            <Slides media={[events[0].poster]} />
+        {#if events && nextEvent}
+            <Slides media={[nextEvent.poster]} />
         {/if}
 
         <Agenda />
