@@ -47,3 +47,9 @@ export async function getOrganizers() {
 
   return organizers;
 }
+
+export async function getEvent(slug) {
+  const events = await getEvents();
+
+  return events.find((event) => event.id === slug);
+}
