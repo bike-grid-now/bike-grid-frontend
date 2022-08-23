@@ -3,19 +3,23 @@
   import Card from "../Card.svelte";
   import Nav from "../Nav.svelte";
   import Slides from "../Slides.svelte";
-  import { EVENTS } from "../stores";
 
+  import videoUrl from "../static/video.mp4";
   import "../styles/global.css";
 
   /** @type {import('./$types').PageData} */
   export let data;
 
-  $: console.log(data);
+  const { events } = data;
 
-  let events = data.events;
-  let nextEvent = events.find(
+  let futureEvents = events.filter(
     (event) => event.date.seconds >= Date.now() / 1000
   );
+  let previousEvents = events.filter(
+    (event) => event.date.seconds < Date.now() / 1000
+  );
+
+  let nextEvent = futureEvents.sort((a, b) => a.date <= b.date)[0];
 
   let homePage;
 </script>
@@ -25,7 +29,7 @@
 <Nav absolute />
 
 <div class="hero">
-  <video src="/assets/video.mp4" autoplay muted loop />
+  <video src={videoUrl} autoplay muted loop />
 
   <div class="hero-overlay">
     <div class="hero-inner">
@@ -71,7 +75,7 @@
       <Slides media={[nextEvent.poster]} />
     {/if}
 
-    <Agenda />
+    <Agenda events={futureEvents} />
   </div>
 
   <div class="card-container">
@@ -102,7 +106,7 @@
     />
   </div>
 
-  <Agenda previous />
+  <Agenda events={previousEvents} previous />
 
   {#if homePage}
     <Slides media={homePage} />
