@@ -1,15 +1,13 @@
 <script>
-  import Time from "svelte-time";
+  import { format } from "date-fns";
   import Slides from "../../../Slides.svelte";
 
   /** @type {import('./$types').PageData} */
   export let data;
   let { event } = data;
 
-  function toDateTime(seconds) {
-    let t = new Date(1970, 0, 1);
-    t.setSeconds(seconds - 18000);
-    return t.toISOString();
+  function formatDate(date) {
+    return format(new Date(date), "EEEE, LLLL d h:mm a");
   }
 </script>
 
@@ -19,10 +17,7 @@
       <div class="card">
         <h1>{event.eventName}</h1>
         <p>
-          <Time
-            timestamp={toDateTime(event.date.seconds)}
-            format="dddd, MMMM D @ h:mm A"
-          />
+          {formatDate(event.date)}
         </p>
       </div>
 

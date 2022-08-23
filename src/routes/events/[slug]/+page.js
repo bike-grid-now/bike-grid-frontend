@@ -5,7 +5,12 @@ import { getEvent } from "../../../firebase";
 export async function load({ params: { slug } }) {
   const event = await getEvent(slug);
   if (event) {
-    return { event };
+    return {
+      event: {
+        ...event,
+        date: event.date.toDate(),
+      },
+    };
   }
 
   throw error(404, "Not found");
