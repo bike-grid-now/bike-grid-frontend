@@ -11,8 +11,6 @@
     previous ? a.date > b.date : a.date < b.date
   );
 
-  console.log(sortedEvents);
-
   function gotoEvent(id) {
     navigate("/events/" + id);
   }
