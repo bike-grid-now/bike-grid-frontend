@@ -1,6 +1,5 @@
 <script>
   import Time from "svelte-time";
-  import { navigate } from "svelte-routing";
 
   export let events = [];
   export let previous = false;
@@ -10,10 +9,6 @@
   let sortedEvents = events.sort((a, b) =>
     previous ? a.date > b.date : a.date < b.date
   );
-
-  function gotoEvent(id) {
-    navigate("/events/" + id);
-  }
 
   function toDateTime(seconds) {
     let t = new Date(1970, 0, 1);
@@ -31,26 +26,22 @@
 
     <div class="divider" />
 
-    <div class="grid">
+    <div>
       {#each sortedEvents as event}
-        <div class="row" on:click={() => gotoEvent(event.id)}>
-          <div class="p-outer left">
-            <p>{event.eventName}</p>
-          </div>
-          <div class="p-outer">
-            <p>
+        <a class="row" href={`/events/${event.id}`}>
+          <div>
+            <p class="title">{event.eventName}</p>
+            <p class="time">
               <Time
                 timestamp={toDateTime(event.date.seconds)}
                 format={"dddd, MMMM D" + (!previous ? "H:mm A" : "")}
               />
             </p>
           </div>
-          <div class="p-outer right">
-            <p>
-              <span class="material-symbols-outlined arrow">chevron_right</span>
-            </p>
+          <div>
+            <span class="material-symbols-outlined arrow">chevron_right</span>
           </div>
-        </div>
+        </a>
       {/each}
     </div>
   </main>
@@ -79,58 +70,37 @@
     margin-right: 10px;
   }
 
-  .grid {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    grid-row-gap: 15px;
-  }
-
   .row {
-    display: contents;
     transition: 0.15s;
     border-radius: 10px;
-    cursor: pointer;
+    color: white;
 
-    background-color: gray;
-  }
-
-  .row .p-outer {
-    padding: 15px;
-    transition: 0.15s;
-    position: relative;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
   }
 
-  .p-outer.right {
-    align-items: flex-end;
-  }
-
-  .row p {
-    height: fit-content;
-  }
-
-  .row .left {
-    border-radius: 10px 0px 0px 10px;
-  }
-
-  .row .right {
-    border-radius: 0px 10px 10px 0px;
-  }
-
-  .row:hover .p-outer {
+  .row:hover,
+  .row:focus {
     background-color: #c70909;
   }
 
-  .left {
+  .title {
     font-weight: bold;
   }
 
-  .right {
-    display: flex;
-    align-items: center;
-    grid-gap: 15px;
+  .time {
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+    color: #ddd;
+    text-decoration: none;
+  }
+
+  .time:hover,
+  .time:focus {
+    text-decoration: none;
   }
 
   .divider {
