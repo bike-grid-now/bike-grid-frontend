@@ -8,6 +8,7 @@
 	import { getFirestore, collection, getDocs, query, orderBy } from 'firebase/firestore';
 
 	import { EVENTS, ORGANIZERS } from './stores.js';
+import Email from "./Email.svelte";
 
 	const firebaseConfig = {
 		apiKey: "AIzaSyDxbVRKzlIaOj-yyVSA_SRiHoMWtSjj8PI",
@@ -32,7 +33,11 @@
 		const querySnapshot = await getDocs(q);
 
 		let events = [];
-		querySnapshot.forEach(doc => events.push(doc.data()))
+		querySnapshot.forEach(doc => {
+			let data = doc.data();
+			data.id = doc.id;
+			events.push(data)
+		})
 
 		EVENTS.set(events)
 
@@ -57,6 +62,7 @@
 <Router>
 	<Route path="/"><Home/></Route>
 	<Route path="/about"><About/></Route>
+	<Route path="email"><Email/></Route>
 	<Route path="/events/:id" let:params><Events id={params.id}/></Route>
 </Router>
 

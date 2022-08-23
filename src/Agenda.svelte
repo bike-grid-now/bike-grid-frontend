@@ -8,20 +8,12 @@
     let events;
     EVENTS.subscribe(val => { if (val) {
         if (previous) {
-
             // filter down to only events that have already happened
-            // events = val
-
             events = val.filter(event => event.date.seconds < Date.now() / 1000);
-
         }
         else {
-
             // filter down to events that have not yet happened
-            // events = val
-
             events = val.filter(event => event.date.seconds >= Date.now() / 1000);
-
         }
     } });
 
@@ -36,34 +28,36 @@
     }
 </script>
 
-<main>
-    <div class="top">
-        <span class="material-symbols-outlined">
-            calendar_month
-            </span>
-        <h2>{previous ? 'Previous' : 'Upcoming'} Events</h2>
-    </div>
+{#if events && events.length > 0}
+    <main>
+        <div class="top">
+            <span class="material-symbols-outlined">
+                calendar_month
+                </span>
+            <h2>{previous ? 'Previous' : 'Upcoming'} Events</h2>
+        </div>
 
-    <div class="divider"/>
+        <div class="divider"/>
 
-    <div class="grid">
-        {#if events && events.length > 0}
-            {#each events as event, i}
-                <div class="row" on:click={() => gotoEvent(event.id)}>
-                    <div class="p-outer left">
-                        <p>{event.eventName}</p>
+        <div class="grid">
+            {#if events && events.length > 0}
+                {#each events as event, i}
+                    <div class="row" on:click={() => gotoEvent(event.id)}>
+                        <div class="p-outer left">
+                            <p>{event.eventName}</p>
+                        </div>
+                        <div class="p-outer">
+                            <p><Time timestamp={toDateTime(event.date.seconds)} format={"dddd, MMMM D" + (previous ? "" : " h:mm A")}/></p>
+                        </div>
+                        <div class="p-outer right">
+                            <p><span class="material-symbols-outlined arrow">chevron_right</span></p>
+                        </div>
                     </div>
-                    <div class="p-outer">
-                        <p><Time timestamp={toDateTime(event.date.seconds)} format={"dddd, MMMM D" + (previous ? "" : " h:mm A")}/></p>
-                    </div>
-                    <div class="p-outer right">
-                        <p><span class="material-symbols-outlined arrow">chevron_right</span></p>
-                    </div>
-                </div>
-            {/each}
-        {/if}
-    </div>
-</main>
+                {/each}
+            {/if}
+        </div>
+    </main>
+{/if}
 
 <style>
     main {

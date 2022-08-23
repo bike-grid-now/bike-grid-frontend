@@ -64,7 +64,7 @@
             </div>
         </a>
 
-        <a href="" target="_blank">
+        <a href="/email">
             <div class="button-jam">
                 <div class="left">
                     <span class="material-symbols-outlined">mail</span>
@@ -161,11 +161,17 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding: 0px 15px;
     }
 
     .hero-inner h1 {
         font-size: 3rem;
         margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .hero-inner p {
+        text-align: center;
     }
 
     .card-container {
@@ -267,6 +273,12 @@
     }
 
     .footer {
-        height: 25px;
+        height: 15px;
+    }
+
+    @media only screen and (max-width: 800px) {
+        .card-container, .sideby {
+            grid-template-columns: 1fr;
+        }
     }
 </style>

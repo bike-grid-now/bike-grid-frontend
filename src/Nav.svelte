@@ -79,13 +79,13 @@
         margin-top: 25px;
 
         width: 100%;
-        height: 200px;
+        /* height: 200px; */
     }
 
     .bottom img {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+        /* height: 100%; */
+        object-fit: contain;
         border-radius: 10px;
     }
 
@@ -97,5 +97,9 @@
 
     .left span {
         margin-right: 10px;
+    }
+
+    .content {
+        margin: 0px 15px;
     }
 </style>

@@ -7,7 +7,7 @@
     const PARAMS = "?alt=media&token=d30f649a-88ce-4c47-9487-904d74c40bd3"
     // const PARAMS = ""
 
-    let imageTypes = ["JPEG", "JPG", "PNG", "GIF", "SVG", "TIFF", "ICO", "DVU"]
+    let imageTypes = ["JPEG", "JPG", "PNG", "GIF", "SVG", "TIFF", "TIF", "ICO", "DVU", "JFIF"]
     let videoTypes = ["MPEG", "MP4", "QUICKTIME", "WMV", "AVI", "FLV"]
     let thisExtension;
 
@@ -52,7 +52,9 @@
 
     <div class="foreground">
         {#if imageTypes.includes(media[currentMediaIndex].split('.').pop().toUpperCase())}
-            <img src={BUCKET_URL + media[currentMediaIndex].replace('/', '%2F') + PARAMS} alt="">
+            <a href={BUCKET_URL + media[currentMediaIndex].replace('/', '%2F') + PARAMS} target="_blank">
+                <img src={BUCKET_URL + media[currentMediaIndex].replace('/', '%2F') + PARAMS} alt="">
+            </a>
         {/if}
         
         {#if videoTypes.includes(media[currentMediaIndex].split('.').pop().toUpperCase())}

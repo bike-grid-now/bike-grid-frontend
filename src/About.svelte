@@ -1,7 +1,5 @@
 <script>
     import Nav from "./Nav.svelte";
-    import { onMount } from 'svelte';
-    import axios from 'axios';
     import { ORGANIZERS } from "./stores";
 
     let organizers = [];
@@ -10,20 +8,25 @@
 
 <Nav/>
 
-<div class="content">
+{#if organizers && organizers.length > 0}
+    <div class="content">
 
-    <div class="grid">
-        {#each organizers as o}
-            <div class="card">
-                {#if o.attributes?.Image?.data?.attributes?.url}
-                    <img src={url + o.attributes.Image.data.attributes.url} alt="">
-                {/if}
-                <h2>{o.attributes.Name}</h2>
-                <p>{o.attributes.Description}</p>
-            </div>
-        {/each}
+        <div class="grid">
+            {#each organizers as o}
+                <div class="card">
+                    {#if o.attributes?.Image?.data?.attributes?.url}
+                        <!-- <img src={url + o.attributes.Image.data.attributes.url} alt=""> -->
+                    {/if}
+                    <h2>{o.name}</h2>
+                    <p>{o.description}</p>
+                </div>
+            {/each}
+        </div>
     </div>
-</div>
+
+    <div class="footer"></div>
+{/if}
+
 
 <style>
     .grid {
@@ -50,9 +53,10 @@
         position: relative;
         margin-left: auto;
         margin-right: auto;
-        /* padding: 0px 20px;; */
+        padding: 0px 15px;
 
         margin-top: 20px;
+
     }
 
     img {
@@ -64,5 +68,15 @@
 
     p {
         line-height: 200%;
+    }
+
+    .footer {
+        height: 15px;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .grid {
+            grid-template-columns: 1fr;
+        }
     }
 </style>

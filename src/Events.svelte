@@ -10,12 +10,35 @@
 
     let event, media;
 
-    // let urls = [];
+    import { EVENTS } from './stores.js';
 
+    let events;
+    EVENTS.subscribe(val => {
+        if (val) {
+            events = val;
+            getEvent();
+        }
+    });
 
     onMount(() => {
-       
+        getEvent();
     })
+
+    function getEvent() {
+        if (id && events) {
+            events.forEach(e => {
+                if (e.id === id) {
+                    event = e;
+                }
+            });
+        }
+    }
+
+    function toDateTime(seconds) {
+        let t = new Date(1970, 0, 1);
+        t.setSeconds(seconds - 18000);
+        return t.toISOString();
+    }
 </script>
 
 <Nav />
@@ -24,14 +47,18 @@
     {#if event}
         <div class="sideby">
             <div class="card">
-                <h1>{event.EventName}</h1>
-                <p><Time timestamp={event.Date} format="dddd, MMMM D @ h:mm A"/></p>
+                <h1>{event.eventName}</h1>
+                <p><Time timestamp={toDateTime(event.date.seconds)} format="dddd, MMMM D @ h:mm A"/></p>
             </div>
         
-            <Slides media={[event.Poster.data]}/>
+            <Slides media={[event.poster]}/>
         </div>
     
-        <Slides media={event.Media.data}/>
+        {#if event.media}
+            <div class="slide-container">
+                <Slides media={event.media}/>
+            </div>
+        {/if}
     
     {/if}
 </div>
@@ -54,6 +81,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-gap: 20px;
+        padding: 0px 15px;
     }
 
     .card {
@@ -67,5 +95,15 @@
 
     .footer {
         height: 20px;
+    }
+
+    .slide-container {
+        padding: 0px 15px;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .sideby {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
