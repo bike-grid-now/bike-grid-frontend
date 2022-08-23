@@ -1,8 +1,8 @@
-import { getEvents } from "../firebase";
+import { getOrganizers } from "../../firebase";
 
 /** @type {import('./$types').PageLoad} */
 export async function load() {
   return {
-    events: await getEvents(),
+    organizers: await getOrganizers(),
   };
 }

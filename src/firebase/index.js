@@ -35,3 +35,15 @@ export async function getEvents() {
 
   return events;
 }
+
+export async function getOrganizers() {
+  const organizersRef = collection(db, "organizers");
+  const q = query(organizersRef);
+
+  const querySnapshot = await getDocs(q);
+
+  let organizers = [];
+  querySnapshot.forEach((doc) => organizers.push(doc.data()));
+
+  return organizers;
+}

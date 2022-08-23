@@ -1,8 +1,8 @@
-import { getEvents } from "../firebase";
+import { getOrganizers } from "../../firebase";
 
 /** */
 export async function load() {
   return {
-    events: await getEvents(),
+    organizers: await getOrganizers(),
   };
 }
