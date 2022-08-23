@@ -1,4 +1,6 @@
 <script>
+  import paintCroppedUrl from "./static/paint-cropped.png";
+
   export let absolute = false;
 </script>
 
@@ -17,7 +19,7 @@
       {#if !absolute}
         <a href="/">
           <div class="bottom">
-            <img src="/assets/paint-cropped.png" alt="" />
+            <img src={paintCroppedUrl} alt="" />
           </div>
         </a>
       {/if}
