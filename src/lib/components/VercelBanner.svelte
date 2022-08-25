@@ -1,5 +1,5 @@
 <script>
-  import VercelBanner from "./static/VercelBanner.svg";
+  import VercelBanner from "../../static/VercelBanner.svg";
 </script>
 
 <a href="https://vercel.com/?utm_source=bike-grid-now&utm_campaign=oss">

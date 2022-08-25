@@ -1,4 +1,4 @@
-import { getOrganizers } from "../../firebase";
+import { getOrganizers } from "$lib/firebase";
 
 /** @type {import('./$types').PageLoad} */
 export async function load() {

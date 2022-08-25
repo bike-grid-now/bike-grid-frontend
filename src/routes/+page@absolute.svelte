@@ -1,7 +1,7 @@
 <script>
-  import Agenda from "../Agenda.svelte";
-  import Card from "../Card.svelte";
-  import Slides from "../Slides.svelte";
+  import Agenda from "$lib/components/Agenda.svelte";
+  import Card from "$lib/components/Card.svelte";
+  import Slides from "$lib/components/Slides.svelte";
 
   import videoUrl from "../static/video.mp4";
 

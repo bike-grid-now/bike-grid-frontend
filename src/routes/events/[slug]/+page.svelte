@@ -1,6 +1,6 @@
 <script>
   import { format } from "date-fns";
-  import Slides from "../../../Slides.svelte";
+  import Slides from "$lib/components/Slides.svelte";
 
   /** @type {import('./$types').PageData} */
   export let data;

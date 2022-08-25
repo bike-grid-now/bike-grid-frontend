@@ -1,8 +1,8 @@
 <script>
   import "../styles/global.css";
-  import Nav from "../Nav.svelte";
-  import Seo from "../Seo.svelte";
-  import VercelBanner from "../VercelBanner.svelte";
+  import Nav from "$lib/components/Nav.svelte";
+  import Seo from "$lib/components/Seo.svelte";
+  import VercelBanner from "$lib/components/VercelBanner.svelte";
 </script>
 
 <Nav absolute />

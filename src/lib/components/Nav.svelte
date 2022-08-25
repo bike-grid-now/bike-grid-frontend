@@ -1,5 +1,5 @@
 <script>
-  import paintCroppedUrl from "./static/paint-cropped.png";
+  import paintCroppedUrl from "../../static/paint-cropped.png";
 
   export let absolute = false;
 </script>

@@ -1,5 +1,5 @@
 import { error } from "@sveltejs/kit";
-import { getEvent } from "../../../firebase";
+import { getEvent } from "$lib/firebase";
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ params: { slug } }) {
