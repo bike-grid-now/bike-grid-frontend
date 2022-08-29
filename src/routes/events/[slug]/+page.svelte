@@ -7,7 +7,7 @@
   let { event } = data;
 
   function formatDate(date) {
-    return format(new Date(date), "EEEE, LLLL d h:mm a");
+    return format(new Date(date), "EEEE, LLLL d - h:mm a");
   }
 </script>
 
@@ -19,6 +19,11 @@
         <p>
           {formatDate(event.date)}
         </p>
+
+        {#if event.rsvpLink}
+          <a href={event.rsvpLink} target="_blank" class="button">RSVP</a>
+        {/if}
+
       </div>
 
       <Slides media={[event.poster]} />
@@ -68,6 +73,17 @@
 
   .slide-container {
     padding: 0px 15px;
+  }
+
+  .button {
+    padding: 15px 30px;
+    background-color: #c70909;
+    border-radius: 15px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    width: fit-content;
+    margin-top: 15px;
   }
 
   @media only screen and (max-width: 600px) {

@@ -11,7 +11,7 @@
   );
 
   function formatDate(date) {
-    return format(new Date(date), "EEEE, LLLL d h:mm a");
+    return format(new Date(date), "EEEE, LLLL d - h:mm a");
   }
 </script>
 

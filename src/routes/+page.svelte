@@ -57,11 +57,11 @@
       </div>
     </a>
 
-    <a href="/email">
+    <a href="https://newsletter.bikegridnow.org/" target="_blank">
       <div class="button-jam">
         <div class="left">
           <span class="material-symbols-outlined">mail</span>
-          <p>Get Email Updates</p>
+          <p>Newsletter Signup</p>
         </div>
         <span class="material-symbols-outlined arrow">chevron_right</span>
       </div>
