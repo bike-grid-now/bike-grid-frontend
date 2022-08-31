@@ -3,7 +3,7 @@
   import Card from "$lib/components/Card.svelte";
   import Slides from "$lib/components/Slides.svelte";
 
-  import videoUrl from "../static/video.mp4";
+  import headerPhotoUrl from "../static/header-backdrop.jpeg";
 
   /** @type {import('./$types').PageData} */
   export let data;
@@ -26,8 +26,8 @@
 
 <!-- <a class="twitter-timeline" href="https://twitter.com/bikegridnow?ref_src=twsrc%5Etfw">Tweets by bikegridnow</a>  -->
 
-<div class="hero">
-  <video src={videoUrl} autoplay muted loop />
+<div class="hero" style={`--header-background-image: url(${headerPhotoUrl})`}>
+  <!-- <video src={videoUrl} autoplay muted loop /> -->
 
   <div class="hero-overlay">
     <div class="hero-inner">
@@ -118,13 +118,6 @@
     text-decoration: none;
   }
 
-  video {
-    object-fit: cover;
-    width: 100%;
-    height: 600px;
-    filter: brightness(0.5);
-  }
-
   .sideby {
     display: grid;
     grid-gap: 20px;
@@ -133,6 +126,19 @@
 
   .hero {
     position: relative;
+    width: 100%;
+    height: 600px;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--header-background-image);
+    filter: brightness(0.5);
   }
 
   .hero-overlay {
