@@ -1,27 +1,28 @@
-<script>
+<script lang="ts">
   import Agenda from "$lib/components/Agenda.svelte";
   import Card from "$lib/components/Card.svelte";
   import Slides from "$lib/components/Slides.svelte";
+  import type { PageData } from "./$types";
 
   import headerPhotoUrl from "../static/header-backdrop.jpeg";
 
-  /** @type {import('./$types').PageData} */
-  export let data;
+  export let data: PageData;
 
   const { events } = data;
 
   let futureEvents = events.filter(
-    (event) => new Date(event.date) >= Date.now()
+    (event: { date: number }) => new Date(event.date) >= new Date()
   );
   let previousEvents = events.filter(
-    (event) => new Date(event.date) < Date.now()
+    (event: { date: number }) => new Date(event.date) < new Date()
   );
 
   let nextEvent = futureEvents.sort(
-    (a, b) => new Date(a.date) <= new Date(b.date)
+    (a: { date: number }, b: { date: number }) =>
+      new Date(a.date) <= new Date(b.date)
   )[0];
 
-  let homePage;
+  let homePage = true;
 </script>
 
 <!-- <a class="twitter-timeline" href="https://twitter.com/bikegridnow?ref_src=twsrc%5Etfw">Tweets by bikegridnow</a>  -->

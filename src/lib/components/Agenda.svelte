@@ -1,5 +1,5 @@
-<script>
-  import { format } from "date-fns";
+<script lang="ts">
+  import { format, compareAsc, compareDesc } from "date-fns";
 
   export let events = [];
   export let previous = false;
@@ -7,10 +7,10 @@
   let title = previous ? "Previous Events" : "Upcoming Events";
 
   let sortedEvents = events.sort((a, b) =>
-    previous ? a.date > b.date : a.date < b.date
+    previous ? compareDesc(a.date, b.date) : compareAsc(a.date, b.date)
   );
 
-  function formatDate(date) {
+  function formatDate(date: string) {
     return format(new Date(date), "EEEE, LLLL d - h:mm a");
   }
 </script>

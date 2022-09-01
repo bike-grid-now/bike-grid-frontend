@@ -1,12 +1,12 @@
-<script>
+<script lang="ts">
   import { format } from "date-fns";
   import Slides from "$lib/components/Slides.svelte";
+  import type { PageData } from "./$types";
 
-  /** @type {import('./$types').PageData} */
-  export let data;
+  export let data: PageData;
   let { event } = data;
 
-  function formatDate(date) {
+  function formatDate(date: string) {
     return format(new Date(date), "EEEE, LLLL d - h:mm a");
   }
 </script>
@@ -23,7 +23,6 @@
         {#if event.rsvpLink}
           <a href={event.rsvpLink} target="_blank" class="button">RSVP</a>
         {/if}
-
       </div>
 
       <Slides media={[event.poster]} />

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import "../styles/global.css";
   import Nav from "$lib/components/Nav.svelte";
   import Seo from "$lib/components/Seo.svelte";
